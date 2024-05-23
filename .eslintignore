@@ -13,3 +13,4 @@ yarn.lock
 # GraphQL generated files
 **/*.graphql.ts
 src/graphql/types.ts
+persisted-query-manifest.json
