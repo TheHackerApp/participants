@@ -14,3 +14,8 @@ yarn.lock
 .env.*
 .env
 .npmrc
+.node-version
+
+# GraphQL generated files
+**/*.graphql.ts
+src/graphql/types.ts
