@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { ThemeProvider } from 'next-themes';
 import { PropsWithChildren } from 'react';
-
-import './tailwind.css';
 
 import NextUIProvider from '@/components/NextUIProvider';
 import { ApolloClientProvider } from '@/graphql/clients/provider';
+import { cn } from '@/lib/styles';
+
+import './tailwind.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,9 +19,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={cn(inter.className, 'h-dvh')}>
         <ApolloClientProvider>
-          <NextUIProvider>{children}</NextUIProvider>
+          <NextUIProvider>
+            <ThemeProvider attribute="class">{children}</ThemeProvider>
+          </NextUIProvider>
         </ApolloClientProvider>
       </body>
     </html>
