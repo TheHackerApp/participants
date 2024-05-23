@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.10.4",
+    "@apollo/experimental-nextjs-app-support": "^0.10.1",
+    "@apollo/persisted-query-lists": "^1.0.0",
     "graphql": "^16.8.1",
     "next": "14.2.3",
     "react": "^18",
