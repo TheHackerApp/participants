@@ -22,8 +22,9 @@ export const config: MiddlewareConfig = {
 
 export async function middleware(request: NextRequest): Promise<NextResponse | undefined> {
   const session = request.cookies.get('session');
+  const host = request.headers.get('host')!;
 
-  const context = await loadContext(session?.value, request.headers.get('host') as string);
+  const context = await loadContext(session?.value, host);
   if (!isContextSuccess(context)) {
     // TODO: gracefully handle unknown event errors
     console.error(`[middleware] failed to get user info:`, context.errors.map((err) => err.message).join(', '));
@@ -31,11 +32,12 @@ export async function middleware(request: NextRequest): Promise<NextResponse | u
   }
 
   if (context.user.type !== 'authenticated') {
-    // TODO: initiate trusted oauth flow with accounts
-    return new NextResponse(`<p>You need to login!</p>`, {
-      status: 401,
-      headers: { 'Content-Type': 'text/html; charset=utf-8' },
-    });
+    const url = new URL('/api/session', process.env.ACCOUNTS_URL);
+    url.searchParams.set('domain', host);
+
+    // TODO: handle returning to requested page
+
+    return NextResponse.redirect(url);
   }
 
   return;
