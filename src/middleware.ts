@@ -1,6 +1,7 @@
 import { MiddlewareConfig, NextRequest, NextResponse } from 'next/server';
 
 import { isContextSuccess, loadContext } from '@/lib/context';
+import { loadKey, sign } from '@/lib/crypto';
 
 const INTERNAL_SERVER_ERROR = `
 <!doctype html>
@@ -32,12 +33,19 @@ export async function middleware(request: NextRequest): Promise<NextResponse | u
   }
 
   if (context.user.type !== 'authenticated') {
+    const key = await loadKey(process.env.EVENT_SIGNING_KEY, 'signature');
+
+    const timestamp = new Date().getTime();
+    const signature = await sign(key, `domain=${host}&timestamp=${timestamp}`, 'base64url');
+
     const url = new URL('/api/session', process.env.ACCOUNTS_URL);
     url.searchParams.set('domain', host);
+    url.searchParams.set('timestamp', timestamp.toString());
+    url.searchParams.set('signature', signature);
 
     // TODO: handle returning to requested page
 
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(url, 302);
   }
 
   return;
