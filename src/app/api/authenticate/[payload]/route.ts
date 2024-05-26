@@ -29,12 +29,12 @@ export async function GET(request: Request): Promise<Response> {
     name: 'session',
     value: payload.token,
     httpOnly: true,
-    sameSite: 'strict',
+    sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production',
   });
 
   // TODO: set cookie with signed event slug
 
   const host = request.headers.get('host')!;
-  return Response.redirect(`${SCHEME}://${host}/`);
+  return Response.redirect(`${SCHEME}://${host}/`, 302);
 }
