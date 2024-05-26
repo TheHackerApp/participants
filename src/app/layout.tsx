@@ -3,11 +3,11 @@ import { Inter } from 'next/font/google';
 import { PropsWithChildren } from 'react';
 import { Toaster } from 'react-hot-toast';
 
+import EventProvider from '@/components/EventProvider';
 import NextUIProvider from '@/components/NextUIProvider';
 import ThemeProvider from '@/components/ThemeProvider';
 import { ApolloClientProvider } from '@/graphql/clients/provider';
 import { cn } from '@/lib/styles';
-
 import './tailwind.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -24,8 +24,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <ApolloClientProvider>
           <NextUIProvider>
             <ThemeProvider>
-              {children}
-              <Toaster position="top-right" toastOptions={{ className: 'toast' }} />
+              <EventProvider>
+                {children}
+                <Toaster position="top-right" toastOptions={{ className: 'toast' }} />
+              </EventProvider>
             </ThemeProvider>
           </NextUIProvider>
         </ApolloClientProvider>

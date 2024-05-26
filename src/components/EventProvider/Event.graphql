@@ -1,0 +1,7 @@
+query Event {
+  event {
+    slug
+    active
+    name
+  }
+}
