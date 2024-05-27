@@ -1,3 +1,4 @@
+import { config } from '@fortawesome/fontawesome-svg-core';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { PropsWithChildren } from 'react';
@@ -8,9 +9,12 @@ import NextUIProvider from '@/components/NextUIProvider';
 import ThemeProvider from '@/components/ThemeProvider';
 import { ApolloClientProvider } from '@/graphql/clients/provider';
 import { cn } from '@/lib/styles';
+
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import './tailwind.css';
 
 const inter = Inter({ subsets: ['latin'] });
+config.autoAddCss = false;
 
 export const metadata: Metadata = {
   title: 'Create Next App',
