@@ -5,6 +5,7 @@ import { PropsWithChildren } from 'react';
 import { Toaster } from 'react-hot-toast';
 
 import EventProvider from '@/components/EventProvider';
+import Navigation from '@/components/Navigation';
 import NextUIProvider from '@/components/NextUIProvider';
 import ThemeProvider from '@/components/ThemeProvider';
 import { ApolloClientProvider } from '@/graphql/clients/provider';
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <NextUIProvider>
             <ThemeProvider>
               <EventProvider>
+                <Navigation />
                 {children}
                 <Toaster position="top-right" toastOptions={{ className: 'toast' }} />
               </EventProvider>
