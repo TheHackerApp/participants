@@ -3,7 +3,7 @@
 import { NavbarBrand, NavbarMenuToggle } from '@nextui-org/react';
 import { ReactNode } from 'react';
 
-import { useEvent } from '@/components/EventProvider/context';
+import { useEvent } from '@/components/EventProvider/hooks';
 
 const Brand = (): ReactNode => {
   const { name } = useEvent();

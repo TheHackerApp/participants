@@ -12,7 +12,7 @@ async function EventProvider({ children }: PropsWithChildren): Promise<ReactElem
   // TODO: gracefully handle this case
   if (!data.event) throw new Error('event must exist');
 
-  return <Provider value={data.event}>{children}</Provider>;
+  return <Provider value={{ event: data.event, status: data.application?.status }}>{children}</Provider>;
 }
 
 export default EventProvider;

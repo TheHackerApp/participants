@@ -3,16 +3,28 @@
 import { PropsWithChildren, ReactNode, createContext, useContext } from 'react';
 
 import type { Event } from '@/graphql';
+import { ApplicationStatus } from '@/graphql';
 
-type Data = Pick<Event, 'slug' | 'name' | 'active'>;
+type EventData = Pick<Event, 'slug' | 'name' | 'active'>;
+
+interface Data {
+  event: EventData;
+  status?: ApplicationStatus;
+}
 
 const EventContext = createContext<Data>({
-  slug: '',
-  name: '',
-  active: false,
+  event: { slug: '', name: '', active: false },
 });
 
-export const useEvent = (): Data => useContext(EventContext);
+export const useEvent = (): EventData => {
+  const context = useContext(EventContext);
+  return context.event;
+};
+
+export const useApplicationStatus = (): ApplicationStatus | undefined => {
+  const context = useContext(EventContext);
+  return context.status;
+};
 
 interface Props {
   value: Data;
