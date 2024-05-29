@@ -23,7 +23,7 @@
     "@fortawesome/pro-duotone-svg-icons": "^6.5.2",
     "@fortawesome/pro-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@nextui-org/react": "^2.3.6",
+    "@nextui-org/react": "^2.4.0",
     "@react-stately/utils": "^3.10.1",
     "clsx": "^2.1.1",
     "cookie": "^0.6.0",
