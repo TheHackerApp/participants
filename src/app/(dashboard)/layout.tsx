@@ -4,12 +4,16 @@ import { ReactNode } from 'react';
 
 import { useApplicationStatus } from '@/components/EventProvider/hooks';
 
-const Dashboard = (): ReactNode => {
+interface Props {
+  application: ReactNode;
+}
+
+const Dashboard = ({ application }: Props): ReactNode => {
   const status = useApplicationStatus();
 
   switch (status) {
     case undefined:
-      return <>Unsubmitted</>;
+      return application;
 
     // TODO: fill in these with actual components
 
