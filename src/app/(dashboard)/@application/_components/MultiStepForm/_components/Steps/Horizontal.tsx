@@ -86,9 +86,6 @@ const HorizontalSteps = forwardRef<HTMLAnchorElement, Props>(
         <ol className={cn('flex flex-row flex-nowrap gap-x-3 overflow-x-scroll', colors, className)}>
           {renderedSteps}
         </ol>
-        <label className="mr-2 text-small font-medium text-default-foreground lg:text-medium">
-          {steps[currentStep]?.title}
-        </label>
       </nav>
     );
   },

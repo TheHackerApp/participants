@@ -9,6 +9,7 @@ import { HTMLAttributes, ReactNode, useMemo } from 'react';
 
 import { cn } from '@/lib/styles';
 
+import Header from './_components/Header';
 import NavigationButtons from './_components/NavigationButtons';
 import { HorizontalSteps, type Step, VerticalSteps } from './_components/Steps';
 
@@ -24,12 +25,7 @@ const MultiStepForm = ({ className, steps, children, ...props }: Props): ReactNo
   return (
     <div className={cn('flex h-[calc(100vh_-_60px)] w-full gap-x-2', className)} {...props}>
       <div className="flex hidden h-full w-[344px] flex-shrink-0 flex-col items-start gap-y-8 rounded-large bg-gradient-to-b from-default-100 via-danger-100 to-secondary-100 px-8 py-6 shadow-small lg:flex">
-        <div>
-          <h1 className="text-xl font-medium leading-7 text-default-foreground">Complete your application</h1>
-          <p className="mt-1 text-base font-medium leading-6 text-default-500">
-            Apply to take part in our incredible hackathon experience!
-          </p>
-        </div>
+        <Header />
         <VerticalSteps steps={steps} currentStep={page} />
         <Button
           as={Link}
@@ -45,11 +41,12 @@ const MultiStepForm = ({ className, steps, children, ...props }: Props): ReactNo
       </div>
       <div className="flex h-full w-full flex-col items-center gap-4 md:p-4">
         <div className="sticky top-0 z-10 w-full rounded-large bg-gradient-to-r from-default-100 via-danger-100 to-secondary-100 py-4 shadow-small md:max-w-xl lg:hidden">
-          <div className="flex justify-center">
+          <div className="flex flex-col items-center justify-center">
+            <Header className="text-center" />
             <HorizontalSteps className="pl-8" steps={steps} currentStep={page} />
           </div>
         </div>
-        <div className="h-full w-full p-4 sm:max-w-md md:max-w-lg">
+        <div className="h-full w-full p-4 sm:max-w-lg md:max-w-2xl">
           {children}
           <NavigationButtons
             steps={steps}
