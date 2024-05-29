@@ -25,7 +25,7 @@ async function Navigation(): Promise<ReactElement> {
       }}
       height="60px"
     >
-      <Brand />
+      <Brand wasAccepted={wasAccepted} />
       {wasAccepted && <Links />}
       <NavbarContent
         className="ml-auto flex h-12 max-w-fit items-center gap-0 rounded-full p-0 lg:bg-content1 lg:px-1"
