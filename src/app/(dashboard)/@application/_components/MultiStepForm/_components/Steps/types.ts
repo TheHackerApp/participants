@@ -4,13 +4,12 @@ export interface Step {
   className?: string;
   title: ReactNode;
   description?: ReactNode;
+  path: string;
 }
 
-export interface Props extends HTMLAttributes<HTMLButtonElement> {
-  steps?: Step[];
-  currentStep?: number;
-  defaultStep?: number;
-  onStepChange?: (stepIndex: number) => void;
+export interface Props extends HTMLAttributes<HTMLAnchorElement> {
+  steps: Step[];
+  currentStep: number;
   className?: string;
 }
 

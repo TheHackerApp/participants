@@ -1,32 +1,25 @@
-'use client';
-
-import { useControlledState } from '@react-stately/utils';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
+import Link from 'next/link';
 import { ReactNode, forwardRef } from 'react';
 
-import CheckIcon from '@/app/(dashboard)/@application/_components/MultiStepForm/_components/Steps/CheckIcon';
 import { cn } from '@/lib/styles';
 
+import CheckIcon from './CheckIcon';
 import { type Props, colors } from './types';
 
-const HorizontalSteps = forwardRef<HTMLButtonElement, Props>(
-  (
-    { steps = [], className, defaultStep = 0, currentStep: currentStepProp, onStepChange, ...props },
-    ref,
-  ): ReactNode => {
-    const [currentStep, setCurrentStep] = useControlledState(currentStepProp, defaultStep, onStepChange);
-
+const HorizontalSteps = forwardRef<HTMLAnchorElement, Props>(
+  ({ steps, currentStep, className, ...props }, ref): ReactNode => {
     const renderedSteps = steps.map((step, stepIndex) => {
       const status = currentStep === stepIndex ? 'active' : currentStep < stepIndex ? 'inactive' : 'complete';
 
       return (
         <li key={stepIndex} className="relative flex w-full items-center pr-8">
-          <button
+          <Link
             key={stepIndex}
             ref={ref}
             aria-current={status === 'active' ? 'step' : undefined}
             className="group flex w-full cursor-pointer flex-row items-center justify-center gap-x-3 rounded-large py-2.5"
-            onClick={() => setCurrentStep(stepIndex)}
+            href={step.path}
             {...props}
           >
             <div className="h-full relative flex items-center">
@@ -83,7 +76,7 @@ const HorizontalSteps = forwardRef<HTMLButtonElement, Props>(
                 />
               </div>
             )}
-          </button>
+          </Link>
         </li>
       );
     });

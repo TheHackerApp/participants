@@ -1,7 +1,5 @@
-'use client';
-
-import { useControlledState } from '@react-stately/utils';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
+import Link from 'next/link';
 import { ReactNode, forwardRef } from 'react';
 
 import { cn } from '@/lib/styles';
@@ -9,25 +7,20 @@ import { cn } from '@/lib/styles';
 import CheckIcon from './CheckIcon';
 import { type Props, colors } from './types';
 
-const VerticalSteps = forwardRef<HTMLButtonElement, Props>(
-  (
-    { steps = [], className, defaultStep = 0, currentStep: currentStepProp, onStepChange, ...props },
-    ref,
-  ): ReactNode => {
-    const [currentStep, setCurrentStep] = useControlledState(currentStepProp, defaultStep, onStepChange);
-
+const VerticalSteps = forwardRef<HTMLAnchorElement, Props>(
+  ({ steps, currentStep, className, ...props }, ref): ReactNode => {
     const renderedSteps = steps.map((step, stepIndex) => {
       const status = currentStep === stepIndex ? 'active' : currentStep < stepIndex ? 'inactive' : 'complete';
 
       return (
         <li key={stepIndex} className="relative">
           <div className="flex w-full max-w-full items-center">
-            <button
+            <Link
               key={stepIndex}
               ref={ref}
               aria-current={status === 'active' ? 'step' : undefined}
               className="group flex w-full cursor-pointer items-center justify-center gap-4 rounded-large px-3 py-2.5"
-              onClick={() => setCurrentStep(stepIndex)}
+              href={step.path}
               {...props}
             >
               <div className="flex h-full items-center">
@@ -92,7 +85,7 @@ const VerticalSteps = forwardRef<HTMLButtonElement, Props>(
                   )}
                 </div>
               </div>
-            </button>
+            </Link>
           </div>
           {stepIndex < steps.length - 1 && (
             <div
