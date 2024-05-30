@@ -5,7 +5,7 @@ import { useFormStatus } from 'react-dom';
 import { useController } from 'react-hook-form';
 import type { Control, ControllerRenderProps, FieldPathByValue, FieldValues } from 'react-hook-form';
 
-type Props<TFieldValues extends FieldValues, TPath extends FieldPathByValue<TFieldValues, string>> = Omit<
+type Props<TFieldValues extends FieldValues, TPath extends FieldPathByValue<TFieldValues, string | null>> = Omit<
   InputProps,
   keyof ControllerRenderProps | 'value' | 'onValueChange' | 'isRequired' | 'form'
 > & {
@@ -13,7 +13,7 @@ type Props<TFieldValues extends FieldValues, TPath extends FieldPathByValue<TFie
   name: TPath;
 };
 
-const TextField = <TFieldValues extends FieldValues, TPath extends FieldPathByValue<TFieldValues, string>>({
+const TextField = <TFieldValues extends FieldValues, TPath extends FieldPathByValue<TFieldValues, string | null>>({
   control,
   name,
   required,

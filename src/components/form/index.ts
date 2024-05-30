@@ -21,3 +21,4 @@ export { useForm } from './hook';
 export { default as SelectField } from './SelectField';
 export { default as Submit } from './Submit';
 export { default as TextField } from './TextField';
+export { default as DateField } from './DateField';
