@@ -4,13 +4,13 @@ import { faArrowLeft } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { HTMLAttributes, ReactNode, useMemo } from 'react';
 
 import { cn } from '@/lib/styles';
 
+import { FormContextProvider } from './_components/FormContext';
 import Header from './_components/Header';
-import NavigationButtons from './_components/NavigationButtons';
 import { HorizontalSteps, type Step, VerticalSteps } from './_components/Steps';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -18,7 +18,6 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 const MultiStepForm = ({ className, steps, children, ...props }: Props): ReactNode => {
-  const router = useRouter();
   const path = usePathname();
   const page = useMemo(() => steps.findIndex((step) => step.path === path), [steps, path]);
 
@@ -36,7 +35,7 @@ const MultiStepForm = ({ className, steps, children, ...props }: Props): ReactNo
           href={steps[page - 1]?.path || '#'}
         >
           <FontAwesomeIcon icon={faArrowLeft} />
-          Back
+          Previous
         </Button>
       </div>
       <div className="flex h-full w-full flex-col items-center gap-4 md:p-4">
@@ -47,13 +46,7 @@ const MultiStepForm = ({ className, steps, children, ...props }: Props): ReactNo
           </div>
         </div>
         <div className="h-full w-full p-4 sm:max-w-lg md:max-w-2xl">
-          {children}
-          <NavigationButtons
-            steps={steps}
-            currentPage={page}
-            onNext={() => router.push(steps[page + 1]?.path || '#')}
-            backButtonProps={{ isDisabled: page === 0 }}
-          />
+          <FormContextProvider value={{ page, steps }}>{children}</FormContextProvider>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ import { Gender, RaceEthnicity } from '@/graphql';
 
 import Name from './Name';
 import { defaults, schema } from './schema';
+import { FormControls } from '../../_components/MultiStepForm';
 
 const GENDER_OPTIONS = [
   { label: 'Male', value: Gender.Male },
@@ -40,34 +41,44 @@ const Form = (): ReactNode => {
   const { control } = useForm({ schema, defaults });
 
   return (
-    <form className="grid grid-cols-12 flex-col gap-4 py-8">
-      <Name />
-      <p className="-mt-2 sm:ml-4 col-span-12 text-default-500 text-small">
-        Want to change your name? Head to your{' '}
-        <Link size="sm" href={process.env.NEXT_PUBLIC_ACCOUNTS_URL}>
-          profile
-        </Link>
-        .
-      </p>
+    <form>
+      <div className="grid grid-cols-12 flex-col gap-4 py-8">
+        <Name />
+        <p className="-mt-2 sm:ml-4 col-span-12 text-default-500 text-small">
+          Want to change your name? Head to your{' '}
+          <Link size="sm" href={process.env.NEXT_PUBLIC_ACCOUNTS_URL + '/settings/general'}>
+            profile
+          </Link>
+          .
+        </p>
 
-      <SelectField
-        className="col-span-12 md:col-span-6"
-        control={control}
-        name="gender"
-        label="Gender"
-        options={GENDER_OPTIONS}
-        required
-      />
-      <SelectField
-        className="col-span-12 md:col-span-6"
-        control={control}
-        name="raceEthnicity"
-        label="Race / Ethnicity"
-        options={RACE_ETHNICITY_OPTIONS}
-        required
-      />
+        <SelectField
+          className="col-span-12 md:col-span-6"
+          control={control}
+          name="gender"
+          label="Gender"
+          options={GENDER_OPTIONS}
+          required
+        />
+        <SelectField
+          className="col-span-12 md:col-span-6"
+          control={control}
+          name="raceEthnicity"
+          label="Race / Ethnicity"
+          options={RACE_ETHNICITY_OPTIONS}
+          required
+        />
 
-      <DateField className="col-span-12 md:col-span-6" control={control} name="dateOfBirth" label="Birthday" required />
+        <DateField
+          className="col-span-12 md:col-span-6"
+          control={control}
+          name="dateOfBirth"
+          label="Birthday"
+          required
+        />
+      </div>
+
+      <FormControls control={control} />
     </form>
   );
 };

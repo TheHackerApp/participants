@@ -6,6 +6,7 @@ import { NumberField, SelectField, TextField, useForm } from '@/components/form'
 import { Education } from '@/graphql';
 
 import { defaults, schema } from './schema';
+import { FormControls } from '../../_components/MultiStepForm';
 
 const EDUCATION_OPTIONS = [
   { label: 'Less than Secondary / High School', value: Education.BelowSecondary },
@@ -23,27 +24,31 @@ const Form = (): ReactNode => {
   const { control } = useForm({ schema, defaults });
 
   return (
-    <form className="grid grid-cols-12 flex-col gap-4 py-8">
-      <NumberField
-        className="col-span-6 md:col-span-4"
-        control={control}
-        name="graduationYear"
-        label="Graduation Year"
-        min={1950}
-        max={2100}
-        required
-      />
+    <form>
+      <div className="grid grid-cols-12 flex-col gap-4 py-8">
+        <NumberField
+          className="col-span-6 md:col-span-4"
+          control={control}
+          name="graduationYear"
+          label="Graduation Year"
+          min={1950}
+          max={2100}
+          required
+        />
 
-      <SelectField
-        className="col-span-12 md:col-span-8"
-        control={control}
-        name="education"
-        label="Level of study"
-        options={EDUCATION_OPTIONS}
-        required
-      />
+        <SelectField
+          className="col-span-12 md:col-span-8"
+          control={control}
+          name="education"
+          label="Level of study"
+          options={EDUCATION_OPTIONS}
+          required
+        />
 
-      <TextField className="col-span-12 md:col-span-6" control={control} name="major" label="Major" />
+        <TextField className="col-span-12 md:col-span-6" control={control} name="major" label="Major" />
+      </div>
+
+      <FormControls control={control} />
     </form>
   );
 };
