@@ -5,7 +5,7 @@ import { useFormStatus } from 'react-dom';
 import { useController } from 'react-hook-form';
 import type { Control, ControllerRenderProps, FieldPathByValue, FieldValues } from 'react-hook-form';
 
-type Props<TFieldValues extends FieldValues, TPath extends FieldPathByValue<TFieldValues, string | null>> = Omit<
+type Props<TFieldValues extends FieldValues, TPath extends FieldPathByValue<TFieldValues, number | null>> = Omit<
   InputProps,
   keyof ControllerRenderProps | 'value' | 'onValueChange' | 'isRequired' | 'form'
 > & {
@@ -13,7 +13,7 @@ type Props<TFieldValues extends FieldValues, TPath extends FieldPathByValue<TFie
   name: TPath;
 };
 
-const TextField = <TFieldValues extends FieldValues, TPath extends FieldPathByValue<TFieldValues, string | null>>({
+const NumberField = <TFieldValues extends FieldValues, TPath extends FieldPathByValue<TFieldValues, number | null>>({
   control,
   name,
   required,
@@ -30,25 +30,34 @@ const TextField = <TFieldValues extends FieldValues, TPath extends FieldPathByVa
 
   const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
     (event) => {
+      if (event.target.value.length === 0) {
+        onFieldChange(0);
+        setValue('0');
+        return;
+      }
+
+      const value = parseInt(event.target.value);
+      if (!value) return;
+
+      onFieldChange(value);
       setValue(event.target.value);
-      onFieldChange(event.target.value);
     },
     [onFieldChange],
   );
 
   return (
     <Input
-      type="text"
+      type="number"
       value={value}
       {...rest}
-      isDisabled={pending}
+      isDisabled={pending || field.disabled}
       isRequired={required}
       isInvalid={invalid}
       errorMessage={error?.message}
       onChange={onChange}
       {...field}
-    />
+    ></Input>
   );
 };
 
-export default TextField;
+export default NumberField;
