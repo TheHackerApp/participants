@@ -16,6 +16,7 @@ type Props<TFieldValues extends FieldValues, TPath extends FieldPathByValue<TFie
 const TextField = <TFieldValues extends FieldValues, TPath extends FieldPathByValue<TFieldValues, string | null>>({
   control,
   name,
+  type = 'text',
   required,
   ...rest
 }: Props<TFieldValues, TPath>): ReactNode => {
@@ -38,7 +39,7 @@ const TextField = <TFieldValues extends FieldValues, TPath extends FieldPathByVa
 
   return (
     <Input
-      type="text"
+      type={type}
       value={value}
       {...rest}
       isDisabled={pending}
