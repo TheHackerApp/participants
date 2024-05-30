@@ -1,0 +1,7 @@
+query Name {
+  me {
+    id
+    familyName
+    givenName
+  }
+}

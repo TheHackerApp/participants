@@ -38,7 +38,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse | u
     const timestamp = new Date().getTime();
     const signature = await sign(key, `domain=${host}&timestamp=${timestamp}`, 'base64url');
 
-    const url = new URL('/api/session', process.env.ACCOUNTS_URL);
+    const url = new URL('/api/session', process.env.NEXT_PUBLIC_ACCOUNTS_URL);
     url.searchParams.set('domain', host);
     url.searchParams.set('timestamp', timestamp.toString());
     url.searchParams.set('signature', signature);
