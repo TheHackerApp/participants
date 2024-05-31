@@ -28,8 +28,8 @@ const DateField = <TFieldValues extends FieldValues, TPath extends FieldPathByVa
   const [value, setValue] = useState(() => {
     if (!field.value) return null;
 
-    const date = new Date(field.value);
-    return new CalendarDate(date.getDate() + 1, date.getMonth(), date.getDate());
+    const [year, month, day] = field.value.split('-').map((digit: string) => parseInt(digit, 10));
+    return new CalendarDate(year, month, day);
   });
 
   const { pending } = useFormStatus();
