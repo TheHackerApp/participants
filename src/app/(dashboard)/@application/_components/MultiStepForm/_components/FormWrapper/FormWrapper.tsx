@@ -1,14 +1,13 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, useMemo, useTransition } from 'react';
 import type { Control, DefaultValues } from 'react-hook-form';
 import type { AnyZodObject, TypeOf } from 'zod';
 
 import { useForm } from '@/components/form';
 
 import Controls from './_components/Controls';
-import { useSaveApplicationMutation } from './SaveApplication.graphql';
+import { saveApplication } from './actions';
 import { useFormContext } from '../FormContext';
 
 interface Props<TSchema extends AnyZodObject> {
@@ -19,30 +18,22 @@ interface Props<TSchema extends AnyZodObject> {
 
 const FormWrapper = <TSchema extends AnyZodObject>({ children, schema, defaults }: Props<TSchema>): ReactNode => {
   const { control, handleSubmit } = useForm({ schema, defaults });
-
+  const [isPending, startTransition] = useTransition();
   const { page, steps } = useFormContext();
-  const router = useRouter();
-  const [save, { loading }] = useSaveApplicationMutation();
 
-  const onSubmit = useCallback(
-    async (data: TypeOf<TSchema>) => {
-      try {
-        await save({ variables: { input: data } });
-      } catch {
-        // GraphQL errors handled by middleware
-        return;
-      }
-
-      const step = steps[page + 1];
-      if (step) router.push(step.path);
-    },
-    [save, router, page, steps],
+  const action = useCallback(
+    (form: TypeOf<TSchema>) =>
+      startTransition(async () => {
+        await saveApplication(steps[page + 1]?.path, form);
+      }),
+    [startTransition, page, steps],
   );
+  const onSubmit = useMemo(() => handleSubmit(action), [handleSubmit, action]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={onSubmit}>
       {children(control)}
-      <Controls control={control} loading={loading} />
+      <Controls control={control} loading={isPending} />
     </form>
   );
 };
