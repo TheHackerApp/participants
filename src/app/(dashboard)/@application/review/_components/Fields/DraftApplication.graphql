@@ -1,0 +1,27 @@
+query DraftApplication {
+  draftApplication {
+    addressLine1
+    addressLine2
+    addressLine3
+    administrativeArea
+    country
+    dateOfBirth
+    devpostUrl
+    education
+    gender
+    graduationYear
+    hackathonsAttended
+    locality
+    major
+    portfolioUrl
+    postalCode
+    raceEthnicity
+    shareInformation
+    vcsUrl
+  }
+  me {
+    id
+    familyName
+    givenName
+  }
+}
