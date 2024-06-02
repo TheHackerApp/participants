@@ -1,6 +1,4 @@
-'use client';
-
-import { Button, ButtonProps } from '@nextui-org/react';
+import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { HTMLAttributes, ReactNode } from 'react';
 import { Control, FieldValues } from 'react-hook-form';
@@ -8,19 +6,17 @@ import { Control, FieldValues } from 'react-hook-form';
 import { Submit } from '@/components/form';
 import { cn } from '@/lib/styles';
 
-import { useFormContext } from './FormContext';
+import { useFormContext } from '../../FormContext';
 
 interface Props<TFieldValues extends FieldValues> extends HTMLAttributes<HTMLDivElement> {
   control: Control<TFieldValues>;
-  backButtonProps?: ButtonProps;
-  nextButtonProps?: ButtonProps;
+  loading: boolean;
 }
 
-const FormControls = <TFieldValues extends FieldValues>({
+const Controls = <TFieldValues extends FieldValues>({
   control,
+  loading,
   className,
-  backButtonProps,
-  nextButtonProps,
   ...props
 }: Props<TFieldValues>): ReactNode => {
   const { page, steps } = useFormContext();
@@ -32,7 +28,6 @@ const FormControls = <TFieldValues extends FieldValues>({
         className="rounded-medium border-default-400 text-medium font-medium text-default-600 lg:hidden"
         variant="bordered"
         href={steps[page - 1]?.path || '#'}
-        {...backButtonProps}
       >
         Previous
       </Button>
@@ -46,10 +41,10 @@ const FormControls = <TFieldValues extends FieldValues>({
           backgroundClip: 'padding-box, border-box',
         }}
         label={page < steps.length - 1 ? 'Next' : 'Submit'}
-        {...nextButtonProps}
+        isLoading={loading}
       />
     </div>
   );
 };
 
-export default FormControls;
+export default Controls;

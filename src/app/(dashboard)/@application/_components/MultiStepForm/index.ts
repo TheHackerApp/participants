@@ -1,2 +1,2 @@
 export { default } from './MultiStepForm';
-export { default as FormControls } from './_components/FormControls';
+export { default as FormWrapper } from './_components/FormWrapper';

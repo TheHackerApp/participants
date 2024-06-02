@@ -2,7 +2,7 @@
 
 import { PropsWithChildren, createContext, useContext } from 'react';
 
-import { Step } from './Steps';
+import { Step } from './Navigation';
 
 interface Context {
   steps: Step[];

@@ -11,7 +11,7 @@ import { cn } from '@/lib/styles';
 
 import { FormContextProvider } from './_components/FormContext';
 import Header from './_components/Header';
-import { HorizontalSteps, type Step, VerticalSteps } from './_components/Steps';
+import { HorizontalNavigation, type Step, VerticalNavigation } from './_components/Navigation';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   steps: Step[];
@@ -25,7 +25,7 @@ const MultiStepForm = ({ className, steps, children, ...props }: Props): ReactNo
     <div className={cn('flex h-[calc(100vh_-_60px)] w-full gap-x-2', className)} {...props}>
       <div className="flex hidden h-full w-[344px] flex-shrink-0 flex-col items-start gap-y-8 rounded-large bg-gradient-to-b from-default-100 via-danger-100 to-secondary-100 px-8 py-6 shadow-small lg:flex">
         <Header />
-        <VerticalSteps steps={steps} currentStep={page} />
+        <VerticalNavigation steps={steps} currentStep={page} />
         <Button
           as={Link}
           className="bg-default-100 text-small font-medium text-default-700 shadow-lg"
@@ -42,7 +42,7 @@ const MultiStepForm = ({ className, steps, children, ...props }: Props): ReactNo
         <div className="sticky top-0 z-10 w-full rounded-large bg-gradient-to-r from-default-100 via-danger-100 to-secondary-100 py-4 shadow-small md:max-w-xl lg:hidden">
           <div className="flex flex-col items-center justify-center">
             <Header className="text-center" />
-            <HorizontalSteps className="pl-8" steps={steps} currentStep={page} />
+            <HorizontalNavigation className="pl-8" steps={steps} currentStep={page} />
           </div>
         </div>
         <div className="h-full w-full p-4 sm:max-w-lg md:max-w-2xl">

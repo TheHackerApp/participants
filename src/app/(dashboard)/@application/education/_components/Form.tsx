@@ -2,11 +2,11 @@
 
 import { ReactNode } from 'react';
 
-import { NumberField, SelectField, TextField, useForm } from '@/components/form';
+import { NumberField, SelectField, TextField } from '@/components/form';
 import { Education } from '@/graphql';
 
 import { type Schema, schema } from './schema';
-import { FormControls } from '../../_components/MultiStepForm';
+import { FormWrapper } from '../../_components/MultiStepForm';
 
 const EDUCATION_OPTIONS = [
   { label: 'Less than Secondary / High School', value: Education.BelowSecondary },
@@ -24,11 +24,9 @@ interface Props {
   defaults: Schema;
 }
 
-const Form = ({ defaults }: Props): ReactNode => {
-  const { control } = useForm({ schema, defaults });
-
-  return (
-    <form>
+const Form = ({ defaults }: Props): ReactNode => (
+  <FormWrapper schema={schema} defaults={defaults}>
+    {(control) => (
       <div className="grid grid-cols-12 flex-col gap-4 py-8">
         <NumberField
           className="col-span-6 md:col-span-4"
@@ -51,10 +49,8 @@ const Form = ({ defaults }: Props): ReactNode => {
 
         <TextField className="col-span-12 md:col-span-6" control={control} name="major" label="Major" />
       </div>
-
-      <FormControls control={control} />
-    </form>
-  );
-};
+    )}
+  </FormWrapper>
+);
 
 export default Form;

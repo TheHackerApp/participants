@@ -2,20 +2,18 @@
 
 import { ReactNode } from 'react';
 
-import { BooleanField, NumberField, TextField, useForm } from '@/components/form';
+import { BooleanField, NumberField, TextField } from '@/components/form';
 
 import { type Schema, schema } from './schema';
-import { FormControls } from '../../_components/MultiStepForm';
+import { FormWrapper } from '../../_components/MultiStepForm';
 
 interface Props {
   defaults: Schema;
 }
 
-const Form = ({ defaults }: Props): ReactNode => {
-  const { control } = useForm({ schema, defaults });
-
-  return (
-    <form>
+const Form = ({ defaults }: Props): ReactNode => (
+  <FormWrapper schema={schema} defaults={defaults}>
+    {(control) => (
       <div className="grid grid-cols-12 flex-col gap-4 py-8">
         <TextField
           className="col-span-12 md:col-span-6"
@@ -55,10 +53,8 @@ const Form = ({ defaults }: Props): ReactNode => {
           I would like to share my profile with sponsors/partners
         </BooleanField>
       </div>
-
-      <FormControls control={control} />
-    </form>
-  );
-};
+    )}
+  </FormWrapper>
+);
 
 export default Form;

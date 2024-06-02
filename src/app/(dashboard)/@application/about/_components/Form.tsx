@@ -3,11 +3,11 @@
 import { Input, Link } from '@nextui-org/react';
 import { ReactNode } from 'react';
 
-import { DateField, SelectField, useForm } from '@/components/form';
+import { DateField, SelectField } from '@/components/form';
 import { Gender, RaceEthnicity } from '@/graphql';
 
 import { type Schema, schema } from './schema';
-import { FormControls } from '../../_components/MultiStepForm';
+import { FormWrapper } from '../../_components/MultiStepForm';
 
 const GENDER_OPTIONS = [
   { label: 'Male', value: Gender.Male },
@@ -42,11 +42,9 @@ interface Props {
   familyName: string;
 }
 
-const Form = ({ defaults, givenName, familyName }: Props): ReactNode => {
-  const { control } = useForm({ schema, defaults });
-
-  return (
-    <form>
+const Form = ({ defaults, givenName, familyName }: Props): ReactNode => (
+  <FormWrapper schema={schema} defaults={defaults}>
+    {(control) => (
       <div className="grid grid-cols-12 flex-col gap-4 py-8">
         <Input className="col-span-12 md:col-span-6" type="text" label="Given name" isReadOnly value={givenName} />
         <Input className="col-span-12 md:col-span-6" type="text" label="Family name" isReadOnly value={familyName} />
@@ -83,10 +81,8 @@ const Form = ({ defaults, givenName, familyName }: Props): ReactNode => {
           required
         />
       </div>
-
-      <FormControls control={control} />
-    </form>
-  );
-};
+    )}
+  </FormWrapper>
+);
 
 export default Form;

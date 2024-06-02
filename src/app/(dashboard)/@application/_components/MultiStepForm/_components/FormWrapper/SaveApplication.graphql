@@ -1,0 +1,8 @@
+mutation SaveApplication($input: SaveApplicationInput!) {
+  saveApplication(input: $input) {
+    userErrors {
+      field
+      message
+    }
+  }
+}
