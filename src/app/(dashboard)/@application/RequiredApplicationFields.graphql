@@ -1,0 +1,13 @@
+query RequiredApplicationFields {
+  draftApplication {
+    addressLine1
+    country
+    dateOfBirth
+    education
+    gender
+    graduationYear
+    hackathonsAttended
+    postalCode
+    raceEthnicity
+  }
+}
