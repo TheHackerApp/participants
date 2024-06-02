@@ -46,11 +46,11 @@ const Form = ({ defaults }: Props): ReactNode => {
           <TextField
             className="col-span-12 md:col-span-6"
             control={control}
-            name="locality"
+            name="postalCode"
             label="Postcal code"
             required
           />
-          <TextField className="col-span-12 md:col-span-6" control={control} name="locality" label="Country" required />
+          <TextField className="col-span-12 md:col-span-6" control={control} name="country" label="Country" required />
         </div>
       )}
     </FormWrapper>
