@@ -1,8 +1,13 @@
+import { Metadata } from 'next';
 import { ReactNode } from 'react';
 
 import Fields from './_components/Fields';
 import Submit from './_components/Submit';
 import { submit } from './actions';
+
+export const metadata: Metadata = {
+  title: 'Review',
+};
 
 const Review = (): ReactNode => (
   <div className="space-y-4">

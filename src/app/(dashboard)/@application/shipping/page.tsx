@@ -1,9 +1,14 @@
+import { Metadata } from 'next';
 import { ReactElement } from 'react';
 
 import { getClient } from '@/graphql/clients/server';
 
 import Form from './_components/Form';
 import { ApplicationShippingStateDocument } from './ApplicationShippingState.graphql';
+
+export const metadata: Metadata = {
+  title: 'Shipping',
+};
 
 const Shipping = async (): Promise<ReactElement> => {
   const client = getClient();

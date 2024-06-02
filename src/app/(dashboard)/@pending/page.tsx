@@ -1,7 +1,12 @@
 import { faCircleCheck } from '@fortawesome/pro-duotone-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, CardBody, CardHeader, Link } from '@nextui-org/react';
+import { Metadata } from 'next';
 import { ReactNode } from 'react';
+
+export const metadata: Metadata = {
+  title: 'Application pending',
+};
 
 const Pending = (): ReactNode => (
   <div className="mt-12 mx-auto max-w-3xl">
