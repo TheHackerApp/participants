@@ -1,4 +1,4 @@
-import { CalendarDate, toCalendarDate } from '@internationalized/date';
+import { parseDate, toCalendarDate } from '@internationalized/date';
 import { DateInput, DateInputProps, DateValue } from '@nextui-org/react';
 import { ReactNode, useCallback, useState } from 'react';
 import { useFormStatus } from 'react-dom';
@@ -25,12 +25,7 @@ const DateField = <TFieldValues extends FieldValues, TPath extends FieldPathByVa
     fieldState: { invalid, error },
   } = useController({ name, control, rules: { required } });
 
-  const [value, setValue] = useState(() => {
-    if (!field.value) return null;
-
-    const [year, month, day] = field.value.split('-').map((digit: string) => parseInt(digit, 10));
-    return new CalendarDate(year, month, day);
-  });
+  const [value, setValue] = useState(() => (field.value ? parseDate(field.value) : null));
 
   const { pending } = useFormStatus();
 
