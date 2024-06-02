@@ -9,7 +9,7 @@ async function EventProvider({ children }: PropsWithChildren): Promise<ReactElem
   const client = getClient();
   const { data } = await client.query({ query: EventDocument });
 
-  // TODO: gracefully handle this case
+  // The event is known to exist at this point due to verification occurring in the middleware
   if (!data.event) throw new Error('event must exist');
 
   return <Provider value={{ event: data.event, status: data.application?.status }}>{children}</Provider>;
