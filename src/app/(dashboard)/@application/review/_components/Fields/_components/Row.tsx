@@ -12,7 +12,7 @@ const Row = <T extends ReactNode>({ label, value, required, render = (value) => 
     <p className="font-medium">
       {label} {required && <span className="text-red-500">*</span>}
     </p>
-    <p>{value ? render(value) : ''}</p>
+    <p>{value !== null && value !== undefined && render(value)}</p>
   </div>
 );
 
