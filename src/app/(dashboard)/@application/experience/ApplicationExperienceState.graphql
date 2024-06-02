@@ -1,0 +1,9 @@
+query ApplicationExperienceState {
+  draftApplication {
+    devpostUrl
+    hackathonsAttended
+    portfolioUrl
+    shareInformation
+    vcsUrl
+  }
+}

@@ -4,10 +4,14 @@ import { ReactNode } from 'react';
 
 import { BooleanField, NumberField, TextField, useForm } from '@/components/form';
 
-import { defaults, schema } from './schema';
+import { type Schema, schema } from './schema';
 import { FormControls } from '../../_components/MultiStepForm';
 
-const Form = (): ReactNode => {
+interface Props {
+  defaults: Schema;
+}
+
+const Form = ({ defaults }: Props): ReactNode => {
   const { control } = useForm({ schema, defaults });
 
   return (

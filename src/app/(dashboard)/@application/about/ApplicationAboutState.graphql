@@ -1,0 +1,12 @@
+query ApplicationAboutState {
+  draftApplication {
+    dateOfBirth
+    gender
+    raceEthnicity
+  }
+  me {
+    id
+    familyName
+    givenName
+  }
+}

@@ -12,12 +12,4 @@ export const schema = z
   })
   .required();
 
-export const defaults: z.infer<typeof schema> = {
-  addressLine1: null,
-  addressLine2: null,
-  addressLine3: null,
-  locality: null,
-  administrativeArea: null,
-  postalCode: null,
-  country: null,
-};
+export type Schema = z.infer<typeof schema>;

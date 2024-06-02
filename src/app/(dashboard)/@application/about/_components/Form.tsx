@@ -1,13 +1,12 @@
 'use client';
 
-import { Link } from '@nextui-org/react';
+import { Input, Link } from '@nextui-org/react';
 import { ReactNode } from 'react';
 
 import { DateField, SelectField, useForm } from '@/components/form';
 import { Gender, RaceEthnicity } from '@/graphql';
 
-import Name from './Name';
-import { defaults, schema } from './schema';
+import { type Schema, schema } from './schema';
 import { FormControls } from '../../_components/MultiStepForm';
 
 const GENDER_OPTIONS = [
@@ -37,13 +36,20 @@ const RACE_ETHNICITY_OPTIONS = [
   { label: 'Other', value: RaceEthnicity.Other },
 ];
 
-const Form = (): ReactNode => {
+interface Props {
+  defaults: Schema;
+  givenName: string;
+  familyName: string;
+}
+
+const Form = ({ defaults, givenName, familyName }: Props): ReactNode => {
   const { control } = useForm({ schema, defaults });
 
   return (
     <form>
       <div className="grid grid-cols-12 flex-col gap-4 py-8">
-        <Name />
+        <Input className="col-span-12 md:col-span-6" type="text" label="Given name" isReadOnly value={givenName} />
+        <Input className="col-span-12 md:col-span-6" type="text" label="Family name" isReadOnly value={familyName} />
         <p className="-mt-2 sm:ml-4 col-span-12 text-default-500 text-small">
           Want to change your name? Head to your{' '}
           <Link size="sm" href={process.env.NEXT_PUBLIC_ACCOUNTS_URL + '/settings/general'}>

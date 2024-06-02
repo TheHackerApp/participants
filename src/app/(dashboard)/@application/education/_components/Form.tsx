@@ -5,7 +5,7 @@ import { ReactNode } from 'react';
 import { NumberField, SelectField, TextField, useForm } from '@/components/form';
 import { Education } from '@/graphql';
 
-import { defaults, schema } from './schema';
+import { type Schema, schema } from './schema';
 import { FormControls } from '../../_components/MultiStepForm';
 
 const EDUCATION_OPTIONS = [
@@ -20,7 +20,11 @@ const EDUCATION_OPTIONS = [
   { label: "I'm not currently a student", value: Education.NonStudent },
 ];
 
-const Form = (): ReactNode => {
+interface Props {
+  defaults: Schema;
+}
+
+const Form = ({ defaults }: Props): ReactNode => {
   const { control } = useForm({ schema, defaults });
 
   return (

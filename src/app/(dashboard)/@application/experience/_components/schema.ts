@@ -10,10 +10,4 @@ export const schema = z
   })
   .required();
 
-export const defaults: z.infer<typeof schema> = {
-  vcsUrl: null,
-  portfolioUrl: null,
-  devpostUrl: null,
-  hackathonsAttended: null,
-  shareInformation: true,
-};
+export type Schema = z.infer<typeof schema>;
