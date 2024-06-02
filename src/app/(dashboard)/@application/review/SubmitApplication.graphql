@@ -1,0 +1,11 @@
+mutation SubmitApplication {
+  submitApplication {
+    application {
+      status
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}

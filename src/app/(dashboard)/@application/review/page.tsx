@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 
 import Fields from './_components/Fields';
+import Submit from './_components/Submit';
+import { submit } from './actions';
 
 const Review = (): ReactNode => (
   <div className="space-y-4">
@@ -12,6 +14,7 @@ const Review = (): ReactNode => (
       </p>
     </div>
     <Fields />
+    <Submit action={submit} />
   </div>
 );
 
