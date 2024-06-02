@@ -45,6 +45,7 @@ const Fields = async (): Promise<ReactElement> => {
         <Row label="GitHub / GitLab / BitBucket URL" value={data.draftApplication?.vcsUrl} />
         <Row label="Portfolio URL" value={data.draftApplication?.portfolioUrl} />
         <Row label="Devpost URL" value={data.draftApplication?.devpostUrl} />
+        <Row label="Hackathons attended" value={data.draftApplication?.hackathonsAttended} required />
         <Row
           label="Share profile with sponsors/partners"
           value={data.draftApplication?.shareInformation}
