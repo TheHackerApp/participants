@@ -17,21 +17,21 @@ const Form = (): ReactNode => {
           className="col-span-12 md:col-span-6"
           control={control}
           type="url"
-          name="links.0"
+          name="vcsUrl"
           label="GitHub / GitLab / BitBucket URL"
         />
         <TextField
           className="col-span-12 md:col-span-6"
           control={control}
           type="url"
-          name="links.1"
+          name="portfolioUrl"
           label="Portfolio URL"
         />
         <TextField
           className="col-span-12 md:col-span-6"
           control={control}
           type="url"
-          name="links.2"
+          name="devpostUrl"
           label="Devpost URL"
         />
 
