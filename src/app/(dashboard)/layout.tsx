@@ -6,9 +6,10 @@ import { useApplicationStatus } from '@/components/EventProvider/hooks';
 
 interface Props {
   application: ReactNode;
+  pending: ReactNode;
 }
 
-const Dashboard = ({ application }: Props): ReactNode => {
+const Dashboard = ({ application, pending }: Props): ReactNode => {
   const status = useApplicationStatus();
 
   switch (status) {
@@ -18,7 +19,7 @@ const Dashboard = ({ application }: Props): ReactNode => {
     // TODO: fill in these with actual components
 
     case 'PENDING':
-      return <>Pending...</>;
+      return pending;
 
     case 'ACCEPTED':
       return <>Accepted</>;
