@@ -5,7 +5,7 @@ import { ReactNode } from 'react';
 import { BooleanField, NumberField, TextField } from '@/components/form';
 
 import { type Schema, schema } from './schema';
-import { FormWrapper } from '../../_components/MultiStepForm';
+import { FormWrapper } from '../../../_components/MultiStepForm';
 
 interface Props {
   defaults: Schema;

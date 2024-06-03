@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
+
+import Loading from '@/components/Loading';
 
 import Fields from './_components/Fields';
 import Submit from './_components/Submit';
@@ -18,7 +20,9 @@ const Review = (): ReactNode => (
         change it.
       </p>
     </div>
-    <Fields />
+    <Suspense fallback={<Loading />}>
+      <Fields />
+    </Suspense>
     <Submit action={submit} />
   </div>
 );

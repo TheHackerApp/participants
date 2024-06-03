@@ -6,7 +6,7 @@ import { NumberField, SelectField, TextField } from '@/components/form';
 import { Education } from '@/graphql';
 
 import { type Schema, schema } from './schema';
-import { FormWrapper } from '../../_components/MultiStepForm';
+import { FormWrapper } from '../../../_components/MultiStepForm';
 
 const EDUCATION_OPTIONS = [
   { label: 'Less than Secondary / High School', value: Education.BelowSecondary },

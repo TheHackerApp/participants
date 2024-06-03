@@ -7,7 +7,7 @@ import { DateField, SelectField } from '@/components/form';
 import { Gender, RaceEthnicity } from '@/graphql';
 
 import { type Schema, schema } from './schema';
-import { FormWrapper } from '../../_components/MultiStepForm';
+import { FormWrapper } from '../../../_components/MultiStepForm';
 
 const GENDER_OPTIONS = [
   { label: 'Male', value: Gender.Male },
