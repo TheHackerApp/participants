@@ -4,7 +4,7 @@ import { Input, Link } from '@nextui-org/react';
 import { ReactNode } from 'react';
 
 import { DateField, SelectField } from '@/components/form';
-import { Gender, RaceEthnicity } from '@/graphql';
+import { Gender, RaceEthnicity, Referrer } from '@/graphql';
 
 import { type Schema, schema } from './schema';
 import { FormWrapper } from '../../../_components/MultiStepForm';
@@ -34,6 +34,17 @@ const RACE_ETHNICITY_OPTIONS = [
   { label: 'Other Asian (Thai, Cambodian, etc.)', value: RaceEthnicity.OtherAsian },
   { label: 'Other Pacific Islander', value: RaceEthnicity.OtherPacificIslander },
   { label: 'Other', value: RaceEthnicity.Other },
+];
+
+const REFERRER_OPTIONS = [
+  { label: 'Search engine (Google, Bing, etc.)', value: Referrer.Search },
+  { label: 'Friend or colleague', value: Referrer.Peer },
+  { label: 'Social media (Instagram, TikTok, etc.)', value: Referrer.SocialMedia },
+  { label: 'Advertisement', value: Referrer.Advertisement },
+  { label: 'Blog or article', value: Referrer.Blog },
+  { label: 'Student organization or clob', value: Referrer.StudentOrganization },
+  { label: 'School or university', value: Referrer.School },
+  { label: 'Other', value: Referrer.Other },
 ];
 
 interface Props {
@@ -79,6 +90,16 @@ const Form = ({ defaults, givenName, familyName }: Props): ReactNode => (
           name="dateOfBirth"
           label="Birthday"
           required
+        />
+
+        <span className="col-span-12" />
+
+        <SelectField
+          className="col-span-12 md:col-span-6"
+          control={control}
+          name="referrer"
+          label="How'd you hear about us?"
+          options={REFERRER_OPTIONS}
         />
       </div>
     )}

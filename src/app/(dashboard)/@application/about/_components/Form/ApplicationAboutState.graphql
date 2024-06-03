@@ -3,6 +3,7 @@ query ApplicationAboutState {
     dateOfBirth
     gender
     raceEthnicity
+    referrer
   }
   me {
     id
