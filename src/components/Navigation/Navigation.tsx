@@ -1,14 +1,16 @@
 import { faArrowRightFromBracket, faSliders } from '@fortawesome/pro-duotone-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Link, Navbar, NavbarContent, NavbarItem, Tooltip } from '@nextui-org/react';
+import dynamic from 'next/dynamic';
 import { ReactElement } from 'react';
 
 import { getClient } from '@/graphql/clients/server';
 
 import Brand from './_components/Brand';
 import Links from './_components/Links';
-import ThemeSwitcher from './_components/ThemeSwitcher';
 import { NavigationDocument } from './Navigation.graphql';
+
+const ThemeSwitcher = dynamic(() => import('./_components/ThemeSwitcher'), { ssr: false });
 
 async function Navigation(): Promise<ReactElement> {
   const client = getClient();

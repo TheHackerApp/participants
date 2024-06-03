@@ -3,18 +3,24 @@
 import { faMoon, faSun } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Tooltip } from '@nextui-org/react';
+import cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { ReactNode } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 
 const ThemeSwitcher = (): ReactNode => {
-  const { theme, setTheme } = useTheme();
+  const { forcedTheme: theme } = useTheme();
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const router = useRouter();
 
   const isDarkMode = theme === 'dark' || (prefersDarkMode && theme !== 'light');
   const nextTheme = isDarkMode ? 'light' : 'dark';
 
-  const onPress = () => setTheme(nextTheme);
+  const onPress = () => {
+    cookies.set('theme', nextTheme, { sameSite: 'strict' });
+    router.refresh();
+  };
 
   return (
     <Tooltip delay={1000} content={`Switch to ${nextTheme} mode`}>
