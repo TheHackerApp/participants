@@ -21,7 +21,8 @@ function resolveSource(): SchemaPointer {
       .trim()
       .split(',')
       .map((header) => header.split('=', 2))
-      .filter((header) => header.length === 2 && header.every((part) => part.length > 0)),
+      .filter((header) => header.length === 2 && header.every((part) => part.length > 0))
+      .map(([name, value]) => [name, decodeURIComponent(value)]),
   );
 
   const isSdl = (process.env.GRAPHQL_SCHEMA_IS_SDL || 'false').toLowerCase().trim();
