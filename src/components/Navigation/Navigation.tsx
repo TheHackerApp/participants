@@ -1,4 +1,4 @@
-import { faArrowRightFromBracket } from '@fortawesome/pro-duotone-svg-icons';
+import { faArrowRightFromBracket, faSliders } from '@fortawesome/pro-duotone-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Link, Navbar, NavbarContent, NavbarItem, Tooltip } from '@nextui-org/react';
 import { ReactElement } from 'react';
@@ -33,6 +33,14 @@ async function Navigation(): Promise<ReactElement> {
       >
         <NavbarItem>
           <ThemeSwitcher />
+        </NavbarItem>
+        <NavbarItem>
+          <Tooltip content="Settings">
+            <Button as={Link} href={process.env.NEXT_PUBLIC_ACCOUNTS_URL + '/settings'} isIconOnly variant="light">
+              <FontAwesomeIcon icon={faSliders} className="h-5 w-5" />
+              <span className="sr-only">Settings</span>
+            </Button>
+          </Tooltip>
         </NavbarItem>
         <NavbarItem>
           <Tooltip content="Log out">
