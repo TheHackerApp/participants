@@ -16,6 +16,7 @@ query DraftApplication {
     portfolioUrl
     postalCode
     raceEthnicity
+    referrer
     shareInformation
     vcsUrl
   }

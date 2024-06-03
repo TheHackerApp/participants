@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import { Education, Gender, RaceEthnicity } from '@/graphql';
+import { Education, Gender, RaceEthnicity, Referrer } from '@/graphql';
 import { getClient } from '@/graphql/clients/server';
 
 import Date from './_components/Date';
@@ -29,6 +29,11 @@ const Fields = async (): Promise<ReactElement> => {
           value={data.draftApplication?.dateOfBirth}
           render={(value) => <Date value={value} />}
           required
+        />
+        <Row
+          label="How'd you hear about us?"
+          value={data.draftApplication?.referrer}
+          render={(value) => REFERRER_NAMES[value]}
         />
       </Group>
       <Group name="Education" href="/education">
@@ -102,6 +107,17 @@ const EDUCATION_NAMES: Record<Education, string> = {
   [Education.Vocational]: 'Other Vocational / Trade Program or Apprenticeship',
   [Education.Other]: 'Other',
   [Education.NonStudent]: "I'm not currently a student",
+};
+
+const REFERRER_NAMES: Record<Referrer, string> = {
+  [Referrer.Search]: 'Search engine (Google, Bing, etc.)',
+  [Referrer.Peer]: 'Friend or colleague',
+  [Referrer.SocialMedia]: 'Social media (Instagram, TikTok, etc.)',
+  [Referrer.Advertisement]: 'Advertisement',
+  [Referrer.Blog]: 'Blog or article',
+  [Referrer.StudentOrganization]: 'Student organization or clob',
+  [Referrer.School]: 'School or university',
+  [Referrer.Other]: 'Other',
 };
 
 export default Fields;
