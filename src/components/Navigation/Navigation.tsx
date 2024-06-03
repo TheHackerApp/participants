@@ -1,4 +1,5 @@
 import { faArrowRightFromBracket, faSliders } from '@fortawesome/pro-duotone-svg-icons';
+import { faMoonOverSun } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Link, Navbar, NavbarContent, NavbarItem, Tooltip } from '@nextui-org/react';
 import dynamic from 'next/dynamic';
@@ -10,7 +11,14 @@ import Brand from './_components/Brand';
 import Links from './_components/Links';
 import { NavigationDocument } from './Navigation.graphql';
 
-const ThemeSwitcher = dynamic(() => import('./_components/ThemeSwitcher'), { ssr: false });
+const ThemeSwitcher = dynamic(() => import('./_components/ThemeSwitcher'), {
+  ssr: false,
+  loading: () => (
+    <Button isIconOnly isDisabled variant="light">
+      <FontAwesomeIcon icon={faMoonOverSun} className="h-6 text-default-500" />
+    </Button>
+  ),
+});
 
 async function Navigation(): Promise<ReactElement> {
   const client = getClient();
