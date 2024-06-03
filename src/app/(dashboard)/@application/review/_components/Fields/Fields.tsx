@@ -1,4 +1,5 @@
-import { ReactElement } from 'react';
+import { Link } from '@nextui-org/react';
+import { ReactElement, ReactNode } from 'react';
 
 import { Education, Gender, RaceEthnicity, Referrer } from '@/graphql';
 import { getClient } from '@/graphql/clients/server';
@@ -47,9 +48,9 @@ const Fields = async (): Promise<ReactElement> => {
         <Row label="Major" value={data.draftApplication?.major} />
       </Group>
       <Group name="Experience" href="/experience">
-        <Row label="GitHub / GitLab / BitBucket URL" value={data.draftApplication?.vcsUrl} />
-        <Row label="Portfolio URL" value={data.draftApplication?.portfolioUrl} />
-        <Row label="Devpost URL" value={data.draftApplication?.devpostUrl} />
+        <Row label="GitHub / GitLab / BitBucket URL" value={data.draftApplication?.vcsUrl} render={asLink} />
+        <Row label="Portfolio URL" value={data.draftApplication?.portfolioUrl} render={asLink} />
+        <Row label="Devpost URL" value={data.draftApplication?.devpostUrl} render={asLink} />
         <Row label="Hackathons attended" value={data.draftApplication?.hackathonsAttended} required />
         <Row
           label="Share profile with sponsors/partners"
@@ -69,6 +70,12 @@ const Fields = async (): Promise<ReactElement> => {
     </div>
   );
 };
+
+const asLink = (url: string): ReactNode => (
+  <Link href={url} target="_blank" rel="noreferrer noopener">
+    {url}
+  </Link>
+);
 
 const GENDER_NAMES: Record<Gender, string> = {
   [Gender.Male]: 'Male',
