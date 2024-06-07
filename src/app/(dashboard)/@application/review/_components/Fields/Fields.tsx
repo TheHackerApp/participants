@@ -38,6 +38,7 @@ const Fields = async (): Promise<ReactElement> => {
         />
       </Group>
       <Group name="Education" href="/education">
+        <Row label="School" value={data.draftApplication?.school?.name} required />
         <Row label="Graduation year" value={data.draftApplication?.graduationYear} required />
         <Row
           label="Level of study"

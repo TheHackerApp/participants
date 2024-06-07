@@ -17,6 +17,10 @@ query DraftApplication {
     postalCode
     raceEthnicity
     referrer
+    school {
+      id
+      name
+    }
     shareInformation
     vcsUrl
   }
