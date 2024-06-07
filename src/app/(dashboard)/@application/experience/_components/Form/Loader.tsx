@@ -1,13 +1,12 @@
-import { ReactElement } from 'react';
+'use client';
 
-import { getClient } from '@/graphql/clients/server';
+import { ReactNode } from 'react';
 
-import { ApplicationExperienceStateDocument } from './ApplicationExperienceState.graphql';
+import { useApplicationExperienceStateSuspenseQuery } from './ApplicationExperienceState.graphql';
 import Form from './Form';
 
-const Loader = async (): Promise<ReactElement> => {
-  const client = getClient();
-  const { data } = await client.query({ query: ApplicationExperienceStateDocument });
+const Loader = (): ReactNode => {
+  const { data } = useApplicationExperienceStateSuspenseQuery();
 
   const defaults = {
     vcsUrl: data.draftApplication?.vcsUrl ?? null,

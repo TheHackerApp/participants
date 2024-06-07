@@ -1,13 +1,12 @@
-import { ReactElement } from 'react';
+'use client';
 
-import { getClient } from '@/graphql/clients/server';
+import { ReactNode } from 'react';
 
-import { ApplicationEducationStateDocument } from './ApplicationEducationState.graphql';
+import { useApplicationEducationStateSuspenseQuery } from './ApplicationEducationState.graphql';
 import Form from './Form';
 
-const Loader = async (): Promise<ReactElement> => {
-  const client = getClient();
-  const { data } = await client.query({ query: ApplicationEducationStateDocument });
+const Loader = (): ReactNode => {
+  const { data } = useApplicationEducationStateSuspenseQuery();
 
   const defaults = {
     education: data.draftApplication?.education ?? null,

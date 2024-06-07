@@ -1,13 +1,12 @@
-import { ReactElement } from 'react';
+'use client';
 
-import { getClient } from '@/graphql/clients/server';
+import { ReactNode } from 'react';
 
-import { ApplicationShippingStateDocument } from './ApplicationShippingState.graphql';
+import { useApplicationShippingStateSuspenseQuery } from './ApplicationShippingState.graphql';
 import Form from './Form';
 
-const Loader = async (): Promise<ReactElement> => {
-  const client = getClient();
-  const { data } = await client.query({ query: ApplicationShippingStateDocument });
+const Loader = (): ReactNode => {
+  const { data } = useApplicationShippingStateSuspenseQuery();
 
   const defaults = {
     addressLine1: data.draftApplication?.addressLine1 ?? null,

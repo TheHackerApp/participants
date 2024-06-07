@@ -1,13 +1,12 @@
-import { ReactElement } from 'react';
+'use client';
 
-import { getClient } from '@/graphql/clients/server';
+import { ReactNode } from 'react';
 
-import { ApplicationAboutStateDocument } from './ApplicationAboutState.graphql';
+import { useApplicationAboutStateSuspenseQuery } from './ApplicationAboutState.graphql';
 import Form from './Form';
 
-const Loader = async (): Promise<ReactElement> => {
-  const client = getClient();
-  const { data } = await client.query({ query: ApplicationAboutStateDocument });
+const Loader = (): ReactNode => {
+  const { data } = useApplicationAboutStateSuspenseQuery();
 
   const defaults = {
     gender: data.draftApplication?.gender ?? null,
