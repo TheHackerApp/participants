@@ -1,8 +1,9 @@
 'use client';
 
+import { Link } from '@nextui-org/react';
 import { ReactNode } from 'react';
 
-import { NumberField, SelectField, TextField } from '@/components/form';
+import { AutoCompleteSelect, NumberField, SelectField, TextField } from '@/components/form';
 import { Education } from '@/graphql';
 
 import { type Schema, schema } from './schema';
@@ -28,6 +29,26 @@ const Form = ({ defaults }: Props): ReactNode => (
   <FormWrapper schema={schema} defaults={defaults}>
     {(control) => (
       <div className="grid grid-cols-12 flex-col gap-4 py-8">
+        <AutoCompleteSelect
+          className="col-span-12"
+          control={control}
+          name="schoolId"
+          label="School"
+          index="schools"
+          required
+          description={
+            <>
+              Can&apos;t find your school?{' '}
+              <Link
+                className="text-tiny"
+                href="mailto:support@thehacker.app?subject=Request%20for%20school%20verification"
+              >
+                Shoot us an email.
+              </Link>
+            </>
+          }
+        />
+
         <NumberField
           className="col-span-6 md:col-span-4"
           control={control}

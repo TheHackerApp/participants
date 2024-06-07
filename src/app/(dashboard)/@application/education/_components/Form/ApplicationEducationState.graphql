@@ -3,5 +3,9 @@ query ApplicationEducationState {
     education
     graduationYear
     major
+    school {
+      id
+      name
+    }
   }
 }
