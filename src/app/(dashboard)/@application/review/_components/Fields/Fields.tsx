@@ -1,17 +1,17 @@
-'use client';
-
 import { Link } from '@nextui-org/react';
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 import { Education, Gender, RaceEthnicity, Referrer } from '@/graphql';
+import { getClient } from '@/graphql/clients/server';
 
 import Date from './_components/Date';
 import Group from './_components/Group';
 import Row from './_components/Row';
-import { useDraftApplicationSuspenseQuery } from './DraftApplication.graphql';
+import { DraftApplicationDocument } from './DraftApplication.graphql';
 
-const Fields = (): ReactNode => {
-  const { data } = useDraftApplicationSuspenseQuery();
+const Fields = async (): Promise<ReactElement> => {
+  const client = getClient();
+  const { data } = await client.query({ query: DraftApplicationDocument });
 
   return (
     <div className="space-y-4">
