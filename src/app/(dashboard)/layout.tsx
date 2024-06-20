@@ -8,9 +8,10 @@ interface Props {
   application: ReactNode;
   pending: ReactNode;
   accepted: ReactNode;
+  rejected: ReactNode;
 }
 
-const Dashboard = ({ application, pending, accepted }: Props): ReactNode => {
+const Dashboard = ({ application, pending, accepted, rejected }: Props): ReactNode => {
   const status = useApplicationStatus();
 
   switch (status) {
@@ -26,7 +27,7 @@ const Dashboard = ({ application, pending, accepted }: Props): ReactNode => {
       return accepted;
 
     case 'REJECTED':
-      return <>Rejected</>;
+      return rejected;
 
     case 'WAITLISTED':
       return <>Waitlisted</>;
