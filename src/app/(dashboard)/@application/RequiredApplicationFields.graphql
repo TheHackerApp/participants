@@ -9,5 +9,8 @@ query RequiredApplicationFields {
     hackathonsAttended
     postalCode
     raceEthnicity
+    school {
+      id
+    }
   }
 }

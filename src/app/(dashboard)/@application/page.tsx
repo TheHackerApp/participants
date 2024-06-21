@@ -14,7 +14,8 @@ const Application = async (): Promise<ReactElement> => {
   if (!(data.draftApplication.gender && data.draftApplication.raceEthnicity && data.draftApplication.dateOfBirth))
     redirect('about');
 
-  if (!(data.draftApplication.education && data.draftApplication.graduationYear)) redirect('education');
+  if (!(data.draftApplication.school?.id && data.draftApplication.education && data.draftApplication.graduationYear))
+    redirect('education');
 
   if (!data.draftApplication.hackathonsAttended) redirect('experience');
 
